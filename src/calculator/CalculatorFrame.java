@@ -1,3 +1,4 @@
+
 package calculator;
 
 /*
@@ -27,7 +28,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    int count=0;       //declaring few variables       (1)                                                              
+    int wt,kms;
+    String weight,inputSteps;
         jButton15 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jFrame1 = new javax.swing.JFrame();
@@ -53,7 +56,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
 
-        jButton15.setText("x");
+        jButton15.setText("*");                                                                                                                                                                      //changed 'x'to '*'(2)
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -429,7 +432,15 @@ public class CalculatorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+            if(count==1)                                //calculating calories burnt (3)
+            {
+                inputkms = jTextArea1.getText();
+                kms=inputkms.toInteger();
+                wt=weight.toInteger();
+                float caloriesBurnt = wt*(0.85)*kms;
+                jTextArea1.setText(caloriesBurnt);
+            }// TODO add your handling code here:
+            count=0;
     }//GEN-LAST:event_jButton12ActionPerformed
 
     void InvalidText()//Call This function when the TExt is invalid.
@@ -480,14 +491,20 @@ public class CalculatorFrame extends javax.swing.JFrame {
         s+=",";
         jTextArea1.setText(s);
     }//GEN-LAST:event_jButton20ActionPerformed
-
+    
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        jTextArea1.setText("");//changes(4)
+        count=1;
+        //jTextArea2.setText("enter no. of Calories");
+        //add textarea2
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: changes(5)
+        weight=jTextArea1.getText();
         jTextArea1.setText("");
+        //jTextArea2.setText("enter no. of steps");
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
