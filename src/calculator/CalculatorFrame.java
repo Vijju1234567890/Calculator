@@ -19,6 +19,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
     public CalculatorFrame() {
         initComponents();
     }
+    int count=0;       //declaring few variables       (1)                                                              
+    double wt,kms;
+    String weight,inputkms;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,9 +31,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    int count=0;       //declaring few variables       (1)                                                              
-    int wt,kms;
-    String weight,inputSteps;
+
         jButton15 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jFrame1 = new javax.swing.JFrame();
@@ -56,7 +57,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
 
-        jButton15.setText("*");                                                                                                                                                                      //changed 'x'to '*'(2)
+        jButton15.setText("x");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -202,7 +203,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton17.setText("x");
+        jButton17.setText("*");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton17ActionPerformed(evt);
@@ -284,13 +285,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
                                 .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
                     .addComponent(jButton18)
@@ -326,7 +327,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    
+    
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         if(jTextArea1.getText().equals("Invalid Expression!!"))
@@ -431,16 +434,25 @@ public class CalculatorFrame extends javax.swing.JFrame {
         jTextArea1.setText(s);
     }//GEN-LAST:event_jButton11ActionPerformed
 
+   
+    
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
             if(count==1)                                //calculating calories burnt (3)
             {
                 inputkms = jTextArea1.getText();
-                kms=inputkms.toInteger();
-                wt=weight.toInteger();
-                float caloriesBurnt = wt*(0.85)*kms;
-                jTextArea1.setText(caloriesBurnt);
+                kms=Double.parseDouble(inputkms);
+                wt=Double.parseDouble(weight);
+                double caloriesBurnt = wt*(0.85)*kms;
+                jTextArea1.setText(Double.toString(caloriesBurnt));
+                return;
             }// TODO add your handling code here:
             count=0;
+        EvaluateString obj=new EvaluateString();
+        try {jTextArea1.setText(obj.evaluate(jTextArea1.getText()));}
+        catch(Exception e)
+        {
+            InvalidText();
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     void InvalidText()//Call This function when the TExt is invalid.
@@ -461,7 +473,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
         if(jTextArea1.getText().equals("Invalid Expression!!"))
             jTextArea1.setText("");
         String s=jTextArea1.getText();
-        s+="x";
+        s+="*";
         jTextArea1.setText(s);
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -493,6 +505,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
     
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        weight=jTextArea1.getText();
         jTextArea1.setText("");//changes(4)
         count=1;
         //jTextArea2.setText("enter no. of Calories");
@@ -502,7 +515,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here: changes(5)
-        weight=jTextArea1.getText();
+        
         jTextArea1.setText("");
         //jTextArea2.setText("enter no. of steps");
     }//GEN-LAST:event_jButton19ActionPerformed
